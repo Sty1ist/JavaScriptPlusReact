@@ -24,8 +24,8 @@ let personalMovieDB = {
 function rememberMyFilms() {
     for( let i = 0; i < 2; i++ ) {
 
-        let questionLastWatched  = prompt('One of the last movies I watched');
-        let questionHowMuch  = prompt('How much do you rate it');
+        let questionLastWatched  = prompt('One of the last movies I watched').trim();
+        let questionHowMuch  = prompt('How much do you rate it').trim();
     
         if( questionLastWatched != null && questionHowMuch != null && questionLastWatched != '' && questionHowMuch != '' && questionLastWatched.length <= 50) {
             personalMovieDB.movies[questionLastWatched] = questionHowMuch;
@@ -63,7 +63,7 @@ showMyDB(personalMovieDB);
 
 function writeYourGenres(obj) {
     for(let i = 0; i < 3; i++) {
-        let loveGenres = prompt(`Ваш любимый жанр под номером ${i+1}`, 'horror');
+        let loveGenres = prompt(`Ваш любимый жанр под номером ${i+1}`, 'horror').trim();
         obj.genres.push(loveGenres);
     }
 }
