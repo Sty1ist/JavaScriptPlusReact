@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Обработчики Событий</h1>
+
+    <a class="googleLink" href="google.com"> Go to Google!</a>
+    <script>
+        let googleLink = document.querySelector('.googleLink');
+        googleLink.addEventListener('click', linkHandler);
+
+        function linkHandler(event) {
+            console.log('Event', event)
+            event.preventDefault();
+            console.log('Событие нажиия на googleLink!')
+        }
+
+    </script>
+
+    <div class="box-1">
+        <div class="box-2"></div>
+    </div>
+    <script>
+        let box1 = document.querySelector('.box-1');
+        let box2 = document.querySelector('.box-2');
+        let siteBody = document.body;
+
+        siteBody.addEventListener('click', (e) => { return console.log('Pushed on BODY') })
+        box1.addEventListener('click', (e) => {
+            console.log(e);
+            console.log('event target', e.target);
+            console.log('event current target', e.currentTarget);
+            return console.log('Pushed on box-1');
+        })
+        box2.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log(e);
+            console.log('event target', e.target);
+            console.log('event current target', e.currentTarget);
+            return console.log('Pushed on box-2');
+        })
+    </script>
+
+    <ul id="productList">
+        <li>Banana</li>
+        <li>Tomato</li>
+        <li>Taco</li>
+    </ul>
+    </div>
+    <script>
+        let productList = document.querySelector('#productList');
+        let listItems = productList.querySelectorAll('LI');
+
+        // for (let li of listItems) {
+        //     li.addEventListener('click', (event) => {
+        //         event.target.style.textDecoration = "line-through";
+        //     })
+        // }
+
+        productList.addEventListener('click', (event) => {
+
+            if (event.target.tagName === "LI") {
+                let currentItem = event.target;
+                currentItem.style.textDecoration = "line-through";
+            }
+
+        });
+
+        productList.insertAdjacentHTML('beforeEnd', '<li>aple</li>');
+
+
+        console.log('ListItems', listItems);
+    </script>
+
+    <button id="btn">Кнопка</button>
+    <script>
+        let btn = document.querySelector('#btn');
+        btn.addEventListener('click', btnHandler);
+
+        function btnHandler() {
+            console.log('Событие нажиия на Кнопку!')
+            let box1 = document.querySelector('.box-1');
+            box1.style.transition = "all .4s ease";
+            box1.style.opacity = '0';
+        }
+
+    </script>
+
+    <button id="btn2">Кнопка 2</button>
+    <script>
+        let btn2 = document.querySelector('#btn2');
+        btn2.addEventListener('click', btnHandler2);
+
+        function btnHandler2() {
+            console.log('Событие нажиия на Кнопку 2!');
+            box2.style.transition = "all .4s ease";
+            box1.style.opacity = '1';
+        }
+
+    </script>
+
+    <button id="btnhidden">Спрятать себя</button>
+    <script>
+        let btnHiden = document.querySelector('#btnhidden');
+        btnHiden.addEventListener('click', btnHandlerHiden);
+
+        function btnHandlerHiden() {
+            console.log('Событие нажиия на Кнопку 2!');
+            btnHiden.style.transition = "all .4s ease";
+            btnHiden.style.opacity = '0';
+        }
+
+    </script>
+
+    <div class="btn__wrapper">
+        <div class="btn">save</div>
+        <div class="btn">load</div>
+        <div class="btn">search</div>
+    </div>
+
+    <script>
+        let btnWrapper = document.querySelector('.btn__wrapper');
+        btnWrapper.addEventListener('click', (event) => {
+            let elem = event.target;
+            let btnText = event.target.innerText;
+            elem.setAttribute('data-action', btnText);
+            let action = event.target.dataset.action;
+            console.log('Action', action);
+
+            function save() {
+                alert('сохраняю');
+            }
+
+            function load() {
+                alert('загружаю');
+            }
+
+            function search() {
+                alert('ищу');
+            }
+
+            switch (action) {
+                case 'save':
+                    save();
+                    break
+                case 'load':
+                    load();
+                    break
+                case 'search':
+                    search();
+                    break
+            }
+        })
+    </script>
+
+    <div class="counter__wrapper">
+        <input type="button" class="counter__button" data-counter value="0">
+        <input type="button" class="counter__button" data-counter value="0">
+    </div>
+
+    <script>
+        document.addEventListener('click', (event) => {
+            if (event.target.dataset.counter != undefined) { // если есть атрибут...
+                event.target.value++;
+            }
+        })
+    </script>
+
+    <button data-toggle-id="subscribe-mail">
+        Показать форму подписки
+    </button>
+
+    <form id="subscribe-mail" hidden>
+        Ваша почта: <input type="email">
+    </form>
+
+    <script>
+        document.addEventListener('click', (event) => {
+            let id = event.target.dataset.toggleId;
+            if (!id) return;
+
+            let element = document.getElementById(id);
+            element.hidden = !element.hidden;
+
+        })
+    </script>
+
+    <div class="pets__list">
+        <div class="pets__item">
+            <div class="pets__name">Осёл</div>
+            <div class="pets__info">Домашний осёл или ишак — одомашненный подвид дикого осла, сыгравший важную
+                историческую роль в развитии хозяйства и культуры человека. Все одомашненные ослы относятся к
+                африканским ослам</div>
+            <div class="pets__close">Закрыть</div>
+        </div>
+        <div class="pets__item">
+            <div class="pets__name">Лошадь</div>
+            <div class="pets__info">Домашняя лошадь - животное семейства непарнокопытных, одомашненный и единственный
+                сохранившийся подвид дикой лошади, вымершей в дикой природе, за исключением небольшой популяции лошади
+                Пржевальского.</div>
+            <div class="pets__close">Закрыть</div>
+        </div>
+        <div class="pets__item">
+            <div class="pets__name">Кошка</div>
+            <div class="pets__info">Кошка, или домашняя кошка (лат. Félis silvéstris cátus), — домашнее животное, одно
+                из наиболее популярных (наряду с собакой) "животных-компаньонов". С точки зрения научной систематики,
+                домашняя кошка — млекопитающее семейства кошачьих отряда хищных. Ранее домашнюю кошку нередко
+                рассматривали как отдельный биологический вид.</div>
+            <div class="pets__close">Закрыть</div>
+        </div>
+    </div>
+
+    <script>
+        let petsList = document.querySelector('.pets__list');
+        petsList.addEventListener('click', (event) => {
+            let targetItem = event.target;
+
+            if (!event.target.classList.contains('pets__close')) return;
+            event.target.parentElement.remove();
+        })
+    </script>
+
+
+    <div class="contents" id="contents">
+        <a href="google.com">Google</a>
+        <a href="instagram.com">Insta</a>
+    </div>
+
+    <script>
+        let contentsList = document.querySelector('#contents');
+        contentsList.addEventListener('click', (event) => {
+            let feed = confirm(`вы действительно хотите перейти по ссылке ${event.target.innerText}?`);
+
+            if (feed) return;
+            if (!event.target.tagName === "A") return;
+            event.preventDefault();
+
+        })
+    </script>
+
+
+    <p><img id="largeImg" src="https://en.js.cx/gallery/img1-lg.jpg" alt="Large image"></p>
+
+    <ul id="thumbs">
+        <!-- браузер показывает небольшую встроенную подсказку из атрибута "title" при наведении курсора на текст -->
+        <li>
+            <a href="https://en.js.cx/gallery/img2-lg.jpg" title="Image 2"><img
+                    src="https://en.js.cx/gallery/img2-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img3-lg.jpg" title="Image 3"><img
+                    src="https://en.js.cx/gallery/img3-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img4-lg.jpg" title="Image 4"><img
+                    src="https://en.js.cx/gallery/img4-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img5-lg.jpg" title="Image 5"><img
+                    src="https://en.js.cx/gallery/img5-thumb.jpg"></a>
+        </li>
+        <li>
+            <a href="https://en.js.cx/gallery/img6-lg.jpg" title="Image 6"><img
+                    src="https://en.js.cx/gallery/img6-thumb.jpg"></a>
+        </li>
+    </ul>
+
+    <script>
+        let largeImg = document.querySelector('#largeImg');
+        let imagesList = document.querySelector('#thumbs');
+
+        imagesList.addEventListener('click', (event) => {
+
+            if (event.target.tagName === 'A') {
+                event.preventDefault();
+            }
+            if (event.target.tagName === 'IMG') {
+                largeImg.src = event.target.currentSrc;
+                event.preventDefault();
+            }
+        })
+    </script>
+
+    <div class="fm__title">Кликни на элемент списка, чтобы выделить его.</div>
+    <ul class="fm__list">
+        <li>some text</li>
+        <li>some text 2</li>
+        <li>some text 3</li>
+        <li>some text 4</li>
+        <li>some text 5</li>
+    </ul>
+
+    <script>
+        let fmList = document.querySelector('.fm__list');
+
+        fmList.addEventListener('click', (event) => {
+            if (event.target.tagName !== 'LI') return;
+
+            let targeFmItem = event.target;
+            targeFmItem.classList.add('selected');
+
+            for (let element of fmList.children) {
+                if (event.metaKey || event.ctrlKey) return;
+
+                if (event.target !== element) {
+                    element.classList.remove('selected');
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
+
+<style>
+    body {
+        background-color: rgb(58, 88, 58);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 90px 36px;
+    }
+
+    h1 {
+        color: white;
+        font-size: 32px;
+    }
+
+
+    button {
+        margin-top: 26px;
+        padding: 12px 32px;
+        color: white;
+        background-color: orange;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        font-size: 26px;
+
+    }
+
+    a {
+        margin-top: 26px;
+        color: rgb(7, 131, 233);
+    }
+
+    .selected {
+        background-color: cyan;
+    }
+
+    .box-1 {
+        margin-top: 26px;
+        width: 250px;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(4, 111, 111);
+    }
+
+    .box-2 {
+        width: 150px;
+        height: 150px;
+        background-color: rgb(203, 4, 94);
+    }
+
+    ul {
+        font-size: 36px;
+        cursor: pointer;
+        color: orange;
+    }
+
+    ul ul {
+        color: rgb(187, 241, 136);
+    }
+
+    li {
+        margin-left: 86px;
+        color: white;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    .field {
+        background-color: rgb(133, 237, 133);
+        width: 650px;
+        height: 350px;
+        border: 15px solid black;
+        margin-top: 26px;
+        position: relative;
+    }
+
+    .ball {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgb(240, 87, 21);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        transition: 1s all ease;
+    }
+
+    .btn__wrapper {
+        display: flex;
+        padding: 32px;
+        border: 5px solid black;
+        margin-top: 25px;
+    }
+
+    .btn {
+        padding: 12px 32px;
+        color: white;
+        background-color: rgb(210, 201, 74);
+        margin-right: 12px;
+        cursor: pointer;
+    }
+
+    .btn__wrapper :last-child {
+        margin-right: 0;
+    }
+
+    .counter__wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 36px;
+        width: 200px;
+    }
+
+    .counter__button {
+        padding: 12px 24px;
+        color: blue;
+        background-color: yellow;
+        font-size: 26px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .counter__data {
+        font-size: 26px;
+        color: red;
+    }
+
+    .pets__list {
+        margin-top: 36px;
+        padding: 16px;
+        background-color: bisque;
+        max-width: 70%;
+    }
+
+    .pets__item {
+        position: relative;
+        padding: 26px;
+        background-color: rgb(191, 117, 243);
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 16px;
+    }
+
+    .pets__list :last-child {
+        margin-bottom: 0;
+    }
+
+    .pets__name {
+        margin-bottom: 26px;
+        font-size: 36px;
+    }
+
+    .pets__info {
+        font-size: 26px;
+    }
+
+    .pets__close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        color: white;
+        background-color: rgb(187 56 56);
+        font-size: 16px;
+        padding: 12px 24px;
+        cursor: pointer;
+    }
+</style>
