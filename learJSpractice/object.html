@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+
+        let person = {
+            firstName: "Maksym",
+            lastName: "Riabenko",
+            age: 28,
+            pets: {
+                petName: "Korjyk",
+                petLastName: "Riabenko",
+                age: 1.5,
+            }
+        };
+
+        for (let key in person) {
+            console.log('key:', [key]);
+        }
+
+        console.log('person', person);
+
+
+        let a;
+        let b = null;
+        let c;
+        let d = null;
+
+        let result = a ?? b ?? c ?? d;
+        console.log('result', result ?? 'Нет значения');
+
+
+    </script>
+</body>
+
+</html>
+
+<style>
+    body {
+        background-color: rgb(97, 145, 97);
+    }
+</style>
