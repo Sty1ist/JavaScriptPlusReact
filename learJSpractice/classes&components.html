@@ -9,6 +9,30 @@
 </head>
 
 <body>
+    <h1>JS классы и компоненты</h1>
+
+    <script>
+        // let cat = {
+        //     name: "we",
+        //     age: 2,
+        // }
+        // console.log('cat', cat);
+
+        let someArr = ['1', '2', '4'];
+
+        someArr.forEach((elem) => console.log('elem', elem));
+        let wqe = someArr.map((elem) => {
+            return {
+                num: elem,
+            }
+        })
+
+        console.log(wqe);
+
+
+
+
+    </script>
 
 </body>
 
@@ -17,5 +41,13 @@
 <style>
     body {
         background-color: rgb(120, 165, 120);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: 36px;
+        color: white
     }
 </style>
