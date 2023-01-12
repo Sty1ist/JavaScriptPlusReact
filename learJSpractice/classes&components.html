@@ -12,25 +12,63 @@
     <h1>JS классы и компоненты</h1>
 
     <script>
-        // let cat = {
-        //     name: "we",
-        //     age: 2,
+        'use strict'
+        // function User(name) {
+        //     this.name = name;
+        //     this.admin = false;
+        // };
+
+        // let user = new User('Maksym');
+        // console.log('user.name', user.name);
+        // console.log('user.admin', user.admin);
+
+        // console.log('user', user);
+
+        // function User(name) {
+        //     this.name = name;
+
+        //     this.sayHi = function () {
+        //         console.log("Меня зовут: " + this.name);
+        //     };
         // }
-        // console.log('cat', cat);
 
-        let someArr = ['1', '2', '4'];
+        // let john = new User("John");
+        // console.log('john', john)
 
-        someArr.forEach((elem) => console.log('elem', elem));
-        let wqe = someArr.map((elem) => {
-            return {
-                num: elem,
+        // john.sayHi();
+
+
+        // function Calculator() {
+        //     this.read = function () {
+        //         this.value = +prompt('some num', '');
+        //         this.value2 = +prompt('some num', '');
+        //     }
+        //     this.sum = function () {
+        //         return this.value + this.value2;
+        //     }
+        //     this.mul = function () {
+        //         return this.value * this.value2;
+        //     }
+        // }
+
+        // let calculator = new Calculator();
+        // console.log('calculator', calculator);
+        // console.log('calculator.read', calculator.read());
+        // console.log('calculator.sum', calculator.sum());
+        // console.log('calculator.mul', calculator.mul());
+
+
+        function Accumulator(startingValue = 0) {
+            this.value = startingValue;
+            this.read = function () {
+                return this.value += +prompt('new value', '');
             }
-        })
+        }
 
-        console.log(wqe);
+        let accumulator = new Accumulator(5);
 
-
-
+        console.log('accumulator', accumulator);
+        console.log('accumulator read', accumulator.read());
 
     </script>
 
